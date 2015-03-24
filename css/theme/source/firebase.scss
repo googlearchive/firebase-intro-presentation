@@ -1,0 +1,200 @@
+
+// Default mixins and settings -----------------
+@import "../template/mixins";
+@import "../template/settings";
+// ---------------------------------------------
+
+@font-face {
+  font-family: 'Gotham Thin';
+  src: url("font/Gotham-Thin.otf") format("opentype");
+}
+
+$white: #ffffff;
+$black: #000000;
+
+$azucar: #185689;
+$darkcar: #1b5e96;
+$darkercar: #154a75;
+$bumble-bee: #ffd641;
+
+$slate: #322f31;
+$shale: #1d1d1e;
+$discs: #fec324;
+$keylime: #acfd5b;
+$tarheel: #50b1ff;
+$rebel: #ff6450;
+$pride: #b650ff;
+$cream: #fffbf3;
+
+$slate-dark: #154a75;
+$bumble-mid: #fedd7b;
+$bumble-dark: #c5a530;
+
+
+$font: 'Gotham Thin', Arial;
+$mainFont: "proxima-nova",sans-serif;
+
+$brand-primary: $tarheel;
+$brand-warning: $discs;
+$brand-danger: $rebel;
+
+///////////////////////////////////////////
+
+
+// Base settings for all themes that can optionally be
+// overridden by the super-theme
+
+// Background of the presentation
+$backgroundColor: $slate;
+
+// Primary/body text
+$mainFont: $font;
+$mainFontSize: 32px;
+$mainColor: $cream;
+
+// Headings
+$headingMargin: 0 0 20px 0;
+$headingFont: $font;
+$headingColor: $cream;
+$headingLineHeight: 1em;
+$headingLetterSpacing: 0.02em;
+$headingTextTransform: uppercase;
+$headingTextShadow: 0px 0px 6px rgba(0,0,0,0.2);
+$heading1TextShadow: $headingTextShadow;
+$headingFontWeight: bold;
+
+// Links and actions
+$linkColor: $discs;
+$linkColorHover: $tarheel;
+
+// Text selection
+$selectionBackgroundColor: $tarheel;
+$selectionColor: #fff;
+
+// Generates the presentation background, can be overridden
+// to return a background image or gradient
+@mixin bodyBackground() {
+  background: $backgroundColor;
+}
+
+.text-discs {
+  color: $discs !important;
+}
+
+.text-tarheel {
+  color: $tarheel !important;
+}
+
+.text-rebel {
+  color: $rebel !important;
+}
+
+.text-cream {
+  color: $cream !important;
+}
+
+.slides {
+  section {
+    > h1 {
+      margin-bottom: 100px;
+    }
+    >h2 {
+      margin-bottom: 80px;
+    }
+    >h3 {
+      margin-bottom: 80px;
+    }
+    >h4 {
+      margin-bottom: 80px;
+    }
+    p:nth-child(even) {
+      color: $discs;
+    }
+    ol li:nth-child(odd) {
+      color: $discs;
+    }
+    ol li, p {
+      font-size: 38px;
+    }
+  }
+
+  blockquote {
+    font-style: normal;
+  }
+
+  pre {
+    box-shadow: none !important;
+  }
+
+  pre code {
+    font-size: 20px;
+    line-height: 30px;
+    width: 100%;
+  }
+
+  .era-point {
+    margin-bottom: 40px;
+  }
+
+  .api-point {
+    font-family: Menlo, Courier;
+    color: $cream !important;
+    text-align: left;
+  }
+
+  #json-graph {
+    text-align: left;
+    h4 {
+      text-align: left;
+    }
+    h4:nth-child(2) {
+      margin-left: 140px;
+    }
+    h4:nth-child(3) {
+      margin-left: 540px;
+    }
+    h4:nth-child(4) {
+      margin-left: 800px;
+    }
+  }
+}
+
+.framework-logo {
+  height: 24% !important;
+  width: 24% !important;
+}
+
+.text-large {
+  font-size: 104px !important;
+  line-height: 208px !important;
+}
+
+.text-medium {
+  font-size: 62px !important;
+  line-height: 124px !important;
+}
+
+.text-small {
+  font-size: 42px !important;
+}
+
+#era {
+  padding: 15px;
+  text-transform: uppercase;
+  font-size: 16px;
+}
+
+img.no-style {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+img.white-bg {
+  background: #f0f0f0 !important;
+  padding: 10px !important;
+}
+
+// Theme template ------------------------------
+@import "../template/theme";
+// ---------------------------------------------
