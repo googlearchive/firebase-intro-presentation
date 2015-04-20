@@ -1,166 +1,180 @@
 <!doctype html>
 <html lang="en">
 
-	<head>
-		<meta charset="utf-8">
+  <head>
+    <meta charset="utf-8">
 
-		<title>Building Realtime Apps with Firebase</title>
+    <title>Building Realtime Apps with Firebase</title>
 
-		<meta name="description" content="Intro to Firebase">
-		<meta name="author" content="David East">
+    <meta name="description" content="Intro to Firebase">
+    <meta name="author" content="David East">
 
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="css/reveal.min.css">
-		<link rel="stylesheet" href="css/theme/firebase.css" id="theme">
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="css/theme/firebase.css" id="theme">
 
-		<!-- For syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
-		<script>
-			if( window.location.search.match( /print-pdf/gi ) ) {
-				var link = document.createElement( 'link' );
-				link.rel = 'stylesheet';
-				link.type = 'text/css';
-				link.href = 'css/print/pdf.css';
-				document.getElementsByTagName( 'head' )[0].appendChild( link );
-			}
-		</script>
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+      if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+      }
+    </script>
 
-		<!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
-		<![endif]-->
-	</head>
+  <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+  <script>
+    window.addEventListener('load', installCounter);
 
-	<body>
+    function installCounter() {
+      var devsRef = new Firebase("https://firebase-website.firebaseio.com/stats/signups");
+      var counterSpan = document.getElementById('current-devs');
+      devsRef.on("value", function (snap) {
+        // Use thousand separator in counter.
+        counterSpan.textContent = snap.val().toLocaleString();
+      });
+    }
+    </script>
 
-		<div class="reveal">
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
 
-			<small id="era">
+  <body>
 
-			</small>
+    <div class="reveal">
 
-			<div class="slides">
+      <small id="era">
 
-				<!--
-					Intro
-				-->
-				<section title="">
-					<br><br>
-					<h2>Intro to Firebase</h2>
-					<img src="images/firebase-logo.png" class="no-style">
-					<br> <br>
-					<p>
-						<h6>YOUR_NAME / <a href="http://twitter.com/_davideast">@MY_TWITTER</a></h6>
+      </small>
 
-					</p>
-				</section>
+      <div class="slides">
 
-				<section>
-					<p class="text-cream text-medium">The <span class="text-discs">Realtime Backend</span></p>
-					<p class="text-cream text-medium">for your App</p>
-				</section>
+        <!--
+          Intro
+        -->
+        <section title="">
+          <br><br>
+          <h2>Intro to Firebase</h2>
+          <img src="images/firebase-logo.png" class="no-style">
+          <br> <br>
+          <p>
+            <h6>YOUR_NAME / <a href="http://twitter.com/_davideast">@MY_TWITTER</a></h6>
 
-				<!--
-					Google Docs
-				-->
+          </p>
+        </section>
 
-				<section>
-					<p class="text-small">This is what the users sees</p>
-					<img src="images/gdocs4.gif" alt="gdocs" class="no-style" />
-				</section>
+        <section>
+          <p class="text-cream text-medium">The <span class="text-discs">Realtime Backend</span></p>
+          <p class="text-cream text-medium">for your App</p>
+        </section>
 
-				<section>
-					<p class="text-small">This is what a dev sees</p>
-					<img src="images/backend-reqs.gif" alt="" class="white-bg no-style" />
-				</section>
+        <!--
+          Google Docs
+        -->
 
-				<section>
-					<h4>Backend</h4>
-					<!-- data-box -->
-					<img src="images/data-box.png" class="no-style framework-logo">
-					<img src="images/security-box.png" class="no-style framework-logo">
-					<img src="images/login-box.png" class="no-style framework-logo">
-					<img src="images/hosting-box.png" class="no-style framework-logo">
-				</section>
+        <section>
+          <p class="text-small">This is what the users sees</p>
+          <img src="images/gdocs4.gif" alt="gdocs" class="no-style" />
+        </section>
 
-				<section>
-					<h4>The user expects</h4>
-					<p class="text-small era-point">Speed</p>
-					<p class="text-small era-point">Offline</p>
-					<p class="text-small era-point">Multi-platform</p>
-					<p class="text-small era-point">Simple Authentication</p>
-				</section>
+        <section>
+          <p class="text-small">This is what a dev sees</p>
+          <img src="images/backend-reqs.gif" alt="" class="white-bg no-style" />
+        </section>
 
-				<!--
-					Firebase
-				-->
-				<section>
-					<h3>Firebase</h3>
-					<img src="images/firebase-logo.png" class="no-style era-point">
-					<br>
-					<p class="text-cream">The <span class="text-discs">Realtime Backend</span></p>
-					<p class="text-cream">for your App</p>
-				</section>
+        <section>
+          <h4>Backend</h4>
+          <!-- data-box -->
+          <img src="images/data-box.png" class="no-style framework-logo">
+          <img src="images/security-box.png" class="no-style framework-logo">
+          <img src="images/login-box.png" class="no-style framework-logo">
+          <img src="images/hosting-box.png" class="no-style framework-logo">
+        </section>
 
-				<section>
-					<h2>Cloud database</h2>
-					<p class="era-point">NoSQL data-store</p>
-					<p class="era-point">Returns JSON from a RESTful API</p>
-				</section>
+        <section>
+          <h4>The user expects</h4>
+          <p class="text-small era-point">Speed</p>
+          <p class="text-small era-point">Offline</p>
+          <p class="text-small era-point">Multi-platform</p>
+          <p class="text-small era-point">Simple Authentication</p>
+        </section>
 
-				<section>
-					<img src="/images/simple-api.png" alt="" class="no-style">
-				</section>
+        <!--
+          Firebase
+        -->
+        <section>
+          <h3>Firebase</h3>
+          <img src="images/firebase-logo.png" class="no-style era-point">
+          <br>
+          <p class="text-cream">The <span class="text-discs">Realtime Backend</span></p>
+          <p class="text-cream">for your App</p>
+        </section>
 
-				<section>
-					<h2>Realtime Data</h2>
-					<p class="era-point text-cream">
-						Whenever <span class="text-discs">data is  updated in Firebase</span>,
-						it sends the update down to every <span class="text-tarheel">listening client</span>
-					</p>
-				</section>
+        <section>
+          <h2>Cloud database</h2>
+          <p class="era-point">NoSQL data-store</p>
+          <p class="era-point">Returns JSON from a RESTful API</p>
+        </section>
 
-				<section>
-					<img src="/images/realtime-api.png" alt="" class="no-style" style="max-width: 85%;">
-				</section>
+        <section>
+          <img src="/images/simple-api.png" alt="" class="no-style">
+        </section>
 
-				<section>
-					<p class="text-medium">SDKs</p>
-					<img src="/images/platforms.png" alt="" class="no-style">
-				</section>
+        <section>
+          <h2>Realtime Data</h2>
+          <p class="era-point text-cream">
+            Whenever <span class="text-discs">data is  updated in Firebase</span>,
+            it sends the update down to every <span class="text-tarheel">listening client</span>
+          </p>
+        </section>
 
-				<section>
-					<h2>Store Data</h2>
-					<pre>
-						<code data-trim class="javascript">
+        <section>
+          <img src="/images/realtime-api.png" alt="" class="no-style" style="max-width: 85%;">
+        </section>
+
+        <section>
+          <p class="text-medium">SDKs</p>
+          <img src="/images/platforms.png" alt="" class="no-style">
+        </section>
+
+        <section>
+          <h2>Store Data</h2>
+          <pre>
+            <code data-trim class="javascript">
 var ref = new Firebase('https://webapi.firebaseio.com/realtime');
 ref.set('All the things');
-						</code>
-					</pre>
-				</section>
+            </code>
+          </pre>
+        </section>
 
-				<section>
-					<h2>Sync Data</h2>
-					<pre>
-						<code data-trim class="javascript">
+        <section>
+          <h2>Sync Data</h2>
+          <pre>
+            <code data-trim class="javascript">
 var label = document.getElementById('labelRealtime');
 var ref = new Firebase('https://webapi.firebaseio.com/realtime');
 ref.on('value', function(snap) {
   label.innerText = snap.val();
 });
-						</code>
-					</pre>
-				</section>
+            </code>
+          </pre>
+        </section>
 
-				<section>
-					<h2>Authentication</h2>
-					<pre>
-						<code data-trim class="javascript">
+        <section>
+          <h2>Authentication</h2>
+          <pre>
+            <code data-trim class="javascript">
 var ref = new Firebase('https://webapi.firebaseio.com/');
 
 // Login with Google
@@ -174,132 +188,132 @@ ref.onAuth(function(authData) {
     console.log('User is logged in!');
   }
 });
-						</code>
-					</pre>
+            </code>
+          </pre>
 
-				</section>
+        </section>
 
-				<section>
-					<h3>Bindings</h3>
-					<img src="/images/backbonejs.png" class="framework-logo no-style" />
-					<img src="/images/emberjs.png" class="framework-logo no-style" />
-					<img src="/images/react.png" class="framework-logo no-style" />
-					<img src="/images/angularjs.png" class="framework-logo no-style" />
-				</section>
+        <section>
+          <h3>Bindings</h3>
+          <img src="/images/backbonejs.png" class="framework-logo no-style" />
+          <img src="/images/emberjs.png" class="framework-logo no-style" />
+          <img src="/images/react.png" class="framework-logo no-style" />
+          <img src="/images/angularjs.png" class="framework-logo no-style" />
+        </section>
 
-				<section>
-					<h1>(Optional) Live Coding</h1>
-				</section>
+        <section>
+          <h1>(Optional) Live Coding</h1>
+        </section>
 
-				<section>
-					<p class="text-medium">Documentation is Important</p>
-					<br><br>
-					<p class="era-point text-tarheel">
-						<a class="text-tarheel" href="https://firebase.com/docs">https://firebase.com/docs</a>
-					</p>
-				</section>
+        <section>
+          <p class="text-medium">Documentation is Important</p>
+          <br><br>
+          <p class="era-point text-tarheel">
+            <a class="text-tarheel" href="https://firebase.com/docs">https://firebase.com/docs</a>
+          </p>
+        </section>
 
-				<section>
-					<h4>Firebase meta-data</h4>
-					<p class="era-point">
-						167,000+ registered developers
-					</p>
-					<p class="era-point">
-						1M concurrent users on Firebase sites
-					</p>
-					<p class="era-point">
-						Joined Google October, 2014
-					</p>
-				</section>
+        <section>
+          <h4>Firebase meta-data</h4>
+          <p class="era-point">
+            <span id="current-devs">170,000+</span> registered developers
+          </p>
+          <p class="era-point">
+            1M concurrent users on Firebase sites
+          </p>
+          <p class="era-point">
+            Joined Google October, 2014
+          </p>
+        </section>
 
-				<section>
-					<h4>Firebase in Production</h4>
-					<ul>
-						<li class="era-point">
-						 	<span class="text-discs">Twitch.tv</span> - Notifying users when realtime streams go live
-						</li>
-						<li class="era-point">
-							<span class="text-discs">Citrix</span> - Manages presence in GoTo Meeting
-						</li>
-						<li class="era-point">
-							<span class="text-discs">CBS</span> - Powers the chat for Big Brother's Live Stream
-						</li>
-						<li class="era-point">
-							<span class="text-discs">Warby Parker</span> - Powering pneumatic tubes
-						</li>
-					</ul>
-				</section>
+        <section>
+          <h4>Firebase in Production</h4>
+          <ul>
+            <li class="era-point">
+              <span class="text-discs">Twitch.tv</span> - Notifying users when realtime streams go live
+            </li>
+            <li class="era-point">
+              <span class="text-discs">Citrix</span> - Manages presence in GoTo Meeting
+            </li>
+            <li class="era-point">
+              <span class="text-discs">CBS</span> - Powers the chat for Big Brother's Live Stream
+            </li>
+            <li class="era-point">
+              <span class="text-discs">Warby Parker</span> - Powering pneumatic tubes
+            </li>
+          </ul>
+        </section>
 
-				<section>
-					<h2>Focus on your app</h2>
-					<p class="era-point">The user doesn't care how many databases you have</p>
-					<p class="era-point">What matters is that your app is
-						<span class="text-tarheel">fast and enjoyable</span>
-					</p>
-					</section>
+        <section>
+          <h2>Focus on your app</h2>
+          <p class="era-point">The user doesn't care how many databases you have</p>
+          <p class="era-point">What matters is that your app is
+            <span class="text-tarheel">fast and enjoyable</span>
+          </p>
+          </section>
 
-				<section>
-					<h1>ASK ME QUESTIONS</h1>
-					<h5>David East / <a href="http://twitter.com/_davideast">@_davideast</a></h5>
-					<h5>Developer Advocate / <a href="http://twitter.com/firebase">@Firebase</a></h5>
-				</section>
+        <section>
+          <h1>ASK ME QUESTIONS</h1>
+          <h5>David East / <a href="http://twitter.com/_davideast">@_davideast</a></h5>
+          <h5>Developer Advocate / <a href="http://twitter.com/firebase">@Firebase</a></h5>
+        </section>
 
-			</div>
+      </div>
 
-		</div>
+    </div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.min.js"></script>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
 
-		<script>
+    <script>
 
-			// Full list of configuration options available here:
-			// https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: false,
-				progress: true,
-				history: true,
-				center: true,
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: false,
+        progress: true,
+        history: true,
+        center: true,
 
-				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-				transition: Reveal.getQueryHash().transition || 'concave', // default/cube/page/concave/zoom/linear/fade/none
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'concave', // default/cube/page/concave/zoom/linear/fade/none
 
-				// Parallax scrolling
-				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
-				// parallaxBackgroundSize: '2100px 900px',
+        // Parallax scrolling
+        // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+        // parallaxBackgroundSize: '2100px 900px',
 
-				// Optional libraries used to extend on reveal.js
-				dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-				]
-			});
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
 
-		</script>
+    </script>
 
-		<script>
+    <script>
 
-			function signPostEra( event ) {
-				var title = event.currentSlide.attributes.title;
+      function signPostEra( event ) {
+        var title = event.currentSlide.attributes.title;
 
-				if(title) {
-					var era = document.getElementById('era');
-					era.innerText = title.value;
-				}
-			}
+        if(title) {
+          var era = document.getElementById('era');
+          era.innerText = title.value;
+        }
+      }
 
-			Reveal.addEventListener( 'ready', function( event ) {
-				signPostEra( event );
-			});
+      Reveal.addEventListener( 'ready', function( event ) {
+        signPostEra( event );
+      });
 
-			Reveal.addEventListener( 'slidechanged', function( event ) {
-				signPostEra( event );
-			});
+      Reveal.addEventListener( 'slidechanged', function( event ) {
+        signPostEra( event );
+      });
 
-		</script>
-	</body>
+    </script>
+  </body>
 </html>
