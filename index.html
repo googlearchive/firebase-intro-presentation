@@ -79,28 +79,29 @@
           <p class="text-cream text-medium">for your App</p>
         </section>
 
-        <!--
-          Google Docs
-        -->
-
         <section>
-          <p class="text-small">This is what the users sees</p>
-          <img src="images/gdocs4.gif" alt="gdocs" class="no-style" />
+          <p class="text-medium">Creating an app shouldn't require managing complex infrastructure.</p>
         </section>
 
         <section>
-          <p class="text-small">This is what a dev sees</p>
+          <h3>The Full Stack</h3>
+          <img src="images/full-stack.png" alt="The Full Stack" class="no-style" />
+        </section>
+
+        <section>
+          <p class="text-small">The full stack is never really that simple</p>
           <img src="images/backend-reqs.gif" alt="" class="white-bg no-style" />
         </section>
 
         <section>
-          <h4>Backend</h4>
-          <!-- data-box -->
-          <img src="images/data-box.png" class="no-style framework-logo">
-          <img src="images/security-box.png" class="no-style framework-logo">
-          <img src="images/login-box.png" class="no-style framework-logo">
-          <img src="images/hosting-box.png" class="no-style framework-logo">
+          <p class="text-small">... and neither is the client side</p>
+          <br><br>
+          <img src="images/clients.png" alt="gdocs" class="no-style" />
         </section>
+
+        <section>
+					<p class="text-medium era-point">The user doesn't care about your backend</p>
+				</section>
 
         <section>
           <h4>The user expects</h4>
@@ -122,6 +123,21 @@
         </section>
 
         <section>
+          <h4>The Firebase Backend</h4>
+          <img src="images/data-box.png" class="no-style framework-logo">
+          <img src="images/login-box.png" class="no-style framework-logo">
+          <img src="images/security-box.png" class="no-style framework-logo">
+          <img src="images/hosting-box.png" class="no-style framework-logo">
+        </section>
+
+        <section title="Firebase Intro">
+					<h3>Forget the Server</h3>
+					<p class="era-point">Firebase apps can run on client-side code only</p>
+					<br>
+					<img src="/images/platforms.png" alt="" class="no-style framework-logo">
+				</section>
+
+        <section>
           <h2>Cloud database</h2>
           <p class="era-point">NoSQL data-store</p>
           <p class="era-point">Returns JSON from a RESTful API</p>
@@ -140,7 +156,7 @@
         </section>
 
         <section>
-          <img src="/images/realtime-api.png" alt="" class="no-style" style="max-width: 85%;">
+          <img src="/images/Realtime-sync-anim.gif" alt="" class="no-style" style="max-width: 85%;">
         </section>
 
         <section>
@@ -156,19 +172,44 @@ var ref = new Firebase('https://webapi.firebaseio.com/realtime');
 ref.set('All the things');
             </code>
           </pre>
+
+
+
         </section>
 
         <section>
           <h2>Sync Data</h2>
-          <pre>
-            <code data-trim class="javascript">
-var label = document.getElementById('labelRealtime');
-var ref = new Firebase('https://webapi.firebaseio.com/realtime');
-ref.on('value', function(snap) {
-  label.innerText = snap.val();
+
+          <div class="code-box">
+            <header class="code-box-header">
+              <nav class="code-box-nav">
+                <button data-code="javascript">JavaScript</button>
+                <button data-code="swift">Swift</button>
+                <button data-code="java">Java</button>
+              </nav>
+            </header>
+            <div class="code-box-examples">
+              <pre data-code="javascript" class="isActive">
+                <code class="javascript">
+var ref = new Firebase("https://");
+ref.on("value", function(snap) {
+  console.log(snap.val());
 });
-            </code>
-          </pre>
+                </code>
+              </pre>
+              <pre data-code="swift">
+                <code class="swift">
+var ref = Firebase(url: "https://")
+                </code>
+              </pre>
+              <pre data-code="java">
+                <code class="java">
+Firebase ref = new Firebase("https://");
+                </code>
+              </pre>
+            </div>
+        </div>
+
         </section>
 
         <section>
@@ -194,6 +235,58 @@ ref.onAuth(function(authData) {
         </section>
 
         <section>
+          <h1>(Optional) Live Coding</h1>
+        </section>
+
+        <section>
+					<h3>Security</h3>
+					<p class="text-small">Secure user data</p>
+					<pre>
+						<code data-trim class="json">
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "users": {
+      "$userid": {
+        ".read": "true",
+        ".write": "auth.uid === $userid"
+      }
+    }
+  }
+}
+						</code>
+					</pre>
+
+				</section>
+
+  			<section>
+  					<h3>Hosting</h3>
+  					<p class="text-small">When you're ready to launch</p>
+  					<pre>
+  						<code data-trim class="bash">
+firebase init
+# select your firebase
+firebase deploy
+# party time
+  						</code>
+  					</pre>
+  			</section>
+
+        <section>
+					<h3>Hosting</h3>
+					<p class="text-small era-point">Production-grade</p>
+					<p class="text-small era-point">Free SSL</p>
+					<p class="text-small era-point">CDN cached assets</p>
+					<p class="text-small era-point">One click rollbacks</p>
+				</section>
+
+        <section>
+					<h3>Tooling & Integration</h3>
+				</section>
+
+
+        <section>
           <h3>Bindings</h3>
           <img src="/images/backbonejs.png" class="framework-logo no-style" />
           <img src="/images/emberjs.png" class="framework-logo no-style" />
@@ -202,8 +295,43 @@ ref.onAuth(function(authData) {
         </section>
 
         <section>
-          <h1>(Optional) Live Coding</h1>
-        </section>
+					<h3>AngularFire</h3>
+					<p class="text">A chat app in AngularFire</p>
+					<pre>
+						<code data-trim class="javascript">
+var app = app.module('app', ['firebase']);
+app.controller('ChatCtrl', function($scope, $firebaseArray) {
+  var ref = new Firebase('https://&lt;your-firebase&gt;.firebaseio.com/messages');
+  $scope.messages = $firebaseArray(ref);
+});
+						</code>
+					</pre>
+					<pre>
+						<code data-trim class="html">
+&lt;html&gt;
+  &lt;body ng-app="app"&gt;
+    &lt;div ng-controller="ChatCtrl"&gt;
+      &lt;p ng-repeat="message in messages"&gt;message.text&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+						</code>
+					</pre>
+				</section>
+
+        <section>
+					<h3>Geofire</h3>
+					<p class="text-smaller">Store and query items based on their geographic location in realtime</p>
+					<iframe src="https://geofire.firebaseapp.com/sfVehicles/" height="450px" width="100%"></iframe>
+				</section>
+
+				<section>
+					<h3>Well Documented</h3>
+					<a class="text-tarheel" href="https://firebase.com/docs">
+						<img src="images/docs-site.png">
+					</a>
+				</section>
+
 
         <section>
           <p class="text-medium">Documentation is Important</p>
@@ -245,12 +373,20 @@ ref.onAuth(function(authData) {
         </section>
 
         <section>
-          <h2>Focus on your app</h2>
-          <p class="era-point">The user doesn't care how many databases you have</p>
-          <p class="era-point">What matters is that your app is
-            <span class="text-tarheel">fast and enjoyable</span>
-          </p>
-          </section>
+					<h2>Focus on your app</h2>
+					<p class="era-point">The user doesn't care about the backend</p>
+					<p class="era-point">What matters is that your app is
+						<span class="text-tarheel">fast and enjoyable</span>
+					</p>
+				</section>
+
+        <section title="Summary">
+					<h2>Complete Platform</h2>
+					<img src="images/data-box.png" class="no-style framework-logo">
+					<img src="images/security-box.png" class="no-style framework-logo">
+					<img src="images/login-box.png" class="no-style framework-logo">
+					<img src="images/hosting-box.png" class="no-style framework-logo">
+				</section>
 
         <section>
           <h1>ASK ME QUESTIONS</h1>
@@ -312,6 +448,31 @@ ref.onAuth(function(authData) {
 
       Reveal.addEventListener( 'slidechanged', function( event ) {
         signPostEra( event );
+      });
+
+      NodeList.prototype.forEach = Array.prototype.forEach
+      HTMLCollection.prototype.forEach = Array.prototype.forEach
+      var codeButtons = document.querySelectorAll('.code-box-nav button');
+      codeButtons.forEach(function(button) {
+
+        button.addEventListener('click', function(e) {
+          var codeLang = e.target.attributes['data-code'].value;
+          var codeExamples = e.target.parentElement.parentElement.nextElementSibling.children;
+
+          codeExamples.forEach(function(example) {
+            var exampleCodeLang = example.attributes['data-code'].value;
+
+            if (example.classList.contains('isActive')) {
+              example.classList.remove('isActive');
+            }
+
+            if(codeLang === exampleCodeLang) {
+              example.classList.add('isActive');
+            }
+
+          });
+
+        });
       });
 
     </script>
