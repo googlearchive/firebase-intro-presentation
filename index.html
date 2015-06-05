@@ -31,6 +31,10 @@
       }
     </script>
 
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="/code-box/code-box.html">
+    <link rel="import" href="/code-box/code-example.html">
+
   <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
   <script>
     window.addEventListener('load', installCounter);
@@ -130,12 +134,16 @@
           <img src="images/hosting-box.png" class="no-style framework-logo">
         </section>
 
-        <section title="Firebase Intro">
+        <section>
 					<h3>Forget the Server</h3>
 					<p class="era-point">Firebase apps can run on client-side code only</p>
 					<br>
 					<img src="/images/platforms.png" alt="" class="no-style framework-logo">
 				</section>
+
+        <section>
+          <img src="images/data-box.png" class="no-style framework-logo">
+        </section>
 
         <section>
           <h2>Cloud database</h2>
@@ -180,42 +188,50 @@ ref.set('All the things');
         <section>
           <h2>Sync Data</h2>
 
-          <div class="code-box">
-            <header class="code-box-header">
-              <nav class="code-box-nav">
-                <button data-code="javascript">JavaScript</button>
-                <button data-code="swift">Swift</button>
-                <button data-code="java">Java</button>
-              </nav>
-            </header>
-            <div class="code-box-examples">
-              <pre data-code="javascript" class="isActive">
-                <code class="javascript">
+          <code-box langs="JavaScript,Swift,Java">
+            <code-example lang="JavaScript">
 var ref = new Firebase("https://");
 ref.on("value", function(snap) {
   console.log(snap.val());
 });
-                </code>
-              </pre>
-              <pre data-code="swift">
-                <code class="swift">
+            </code-example>
+            <code-example lang="Swift">
 var ref = Firebase(url: "https://")
-                </code>
-              </pre>
-              <pre data-code="java">
-                <code class="java">
+            </code-example>
+            <code-example lang="Java">
 Firebase ref = new Firebase("https://");
-                </code>
-              </pre>
-            </div>
-        </div>
+            </code-example>
+          </code-box>
 
         </section>
 
         <section>
-          <h2>Authentication</h2>
-          <pre>
-            <code data-trim class="javascript">
+          <h3>Offline</h3>
+          <img class="no-style" src="/images/offline.png">
+        </section>
+
+        <section>
+          <h3>Offline</h3>
+
+          <p class="text-small">What happens when the lights go out?</p>
+          <br><br>
+          <p class="text-small fragment">
+            On mobile, Firebase clients store a local cache of your data. When the user
+            goes offline, the app still works as expected with the local cache.
+          </p>
+
+        </section>
+
+        <section>
+          <img src="images/login-box.png" class="no-style framework-logo">
+        </section>
+
+        <section>
+
+          <h3>Authentication</h3>
+
+          <code-box langs="JavaScript,Swift,Java">
+            <code-example lang="JavaScript" prop="one">
 var ref = new Firebase('https://webapi.firebaseio.com/');
 
 // Login with Google
@@ -229,13 +245,26 @@ ref.onAuth(function(authData) {
     console.log('User is logged in!');
   }
 });
-            </code>
-          </pre>
+            </code-example>
+
+            <code-example lang="Swift">
+var ref = Firebase(url: "https://")
+            </code-example>
+
+            <code-example lang="Java">
+Firebase ref = new Firebase("https://");
+            </code-example>
+
+          </code-box>
 
         </section>
 
         <section>
           <h1>(Optional) Live Coding</h1>
+        </section>
+
+        <section>
+          <img src="images/security-box.png" class="no-style framework-logo">
         </section>
 
         <section>
@@ -259,6 +288,10 @@ ref.onAuth(function(authData) {
 					</pre>
 
 				</section>
+
+        <section>
+          <img src="images/hosting-box.png" class="no-style framework-logo">
+        </section>
 
   			<section>
   					<h3>Hosting</h3>
@@ -332,15 +365,6 @@ app.controller('ChatCtrl', function($scope, $firebaseArray) {
 					</a>
 				</section>
 
-
-        <section>
-          <p class="text-medium">Documentation is Important</p>
-          <br><br>
-          <p class="era-point text-tarheel">
-            <a class="text-tarheel" href="https://firebase.com/docs">https://firebase.com/docs</a>
-          </p>
-        </section>
-
         <section>
           <h4>Firebase meta-data</h4>
           <p class="era-point">
@@ -380,7 +404,7 @@ app.controller('ChatCtrl', function($scope, $firebaseArray) {
 					</p>
 				</section>
 
-        <section title="Summary">
+        <section>
 					<h2>Complete Platform</h2>
 					<img src="images/data-box.png" class="no-style framework-logo">
 					<img src="images/security-box.png" class="no-style framework-logo">
@@ -400,6 +424,7 @@ app.controller('ChatCtrl', function($scope, $firebaseArray) {
 
     <script src="lib/js/head.min.js"></script>
     <script src="js/reveal.min.js"></script>
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 
     <script>
 
@@ -450,30 +475,31 @@ app.controller('ChatCtrl', function($scope, $firebaseArray) {
         signPostEra( event );
       });
 
-      NodeList.prototype.forEach = Array.prototype.forEach
-      HTMLCollection.prototype.forEach = Array.prototype.forEach
-      var codeButtons = document.querySelectorAll('.code-box-nav button');
-      codeButtons.forEach(function(button) {
-
-        button.addEventListener('click', function(e) {
-          var codeLang = e.target.attributes['data-code'].value;
-          var codeExamples = e.target.parentElement.parentElement.nextElementSibling.children;
-
-          codeExamples.forEach(function(example) {
-            var exampleCodeLang = example.attributes['data-code'].value;
-
-            if (example.classList.contains('isActive')) {
-              example.classList.remove('isActive');
-            }
-
-            if(codeLang === exampleCodeLang) {
-              example.classList.add('isActive');
-            }
-
-          });
-
-        });
-      });
+      // NodeList.prototype.forEach = Array.prototype.forEach
+      // HTMLCollection.prototype.forEach = Array.prototype.forEach
+      //
+      // var codeButtons = document.querySelectorAll('.code-box-nav button');
+      // codeButtons.forEach(function(button) {
+      //
+      //   button.addEventListener('click', function(e) {
+      //     var codeLang = e.target.attributes['data-code'].value;
+      //     var codeExamples = e.target.parentElement.parentElement.nextElementSibling.children;
+      //
+      //     codeExamples.forEach(function(example) {
+      //       var exampleCodeLang = example.attributes['data-code'].value;
+      //
+      //       if (example.classList.contains('isActive')) {
+      //         example.classList.remove('isActive');
+      //       }
+      //
+      //       if(codeLang === exampleCodeLang) {
+      //         example.classList.add('isActive');
+      //       }
+      //
+      //     });
+      //
+      //   });
+      // });
 
     </script>
   </body>

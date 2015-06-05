@@ -96,9 +96,9 @@ img.white-bg {
 
 .code-box {
   border-radius: 4px;
-  background: #253238;
+  background: #191919;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  margin-bottom: 16px; }
+  margin-bottom: 8px; }
 
 .code-box header {
   background: #191919;
@@ -126,8 +126,8 @@ img.white-bg {
   color: #DADADA; }
 
 .code-box nav button.is-selected, .code-box nav button.selected {
-  background: #0262C2;
-  color: #FFF; }
+  background: #353535;
+  color: #DADADA; }
 
 .code-box .prettyprint {
   box-shadow: none;
@@ -142,10 +142,6 @@ img.white-bg {
 .code-box-examples pre.isActive {
   display: block; }
 
-.code-box-examples pre code {
-  position: absolute;
-  top: 0; }
-
 code {
   display: none;
   margin: 8px; }
@@ -153,6 +149,9 @@ code {
 .reveal pre {
   margin: 0;
   width: 99%; }
+
+.reveal pre code {
+  max-height: 500px; }
 
 /*********************************************
  * GLOBAL STYLES

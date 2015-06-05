@@ -1,0 +1,37 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+
+<dom-module id="code-example">
+  <template>
+
+    <pre id="codePre" data-code$="{{lang}}">
+      <code class$="{{langLower}}">
+        <content></content>
+      </code>
+    </pre>
+
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: "code-example",
+    properties: {
+      lang: String
+    },
+    ready: function() {
+      window.addEventListener('selectedLang', function(e) {
+        var selectedLang = e.detail;
+        this.setActive(selectedLang);
+      }.bind(this));
+      this.langLower = this.lang.toLowerCase();
+      this.setActive('JavaScript');
+    },
+    setActive: function (active) {
+      if(active === this.lang) {
+        this.$.codePre.classList.add("isActive");
+      } else {
+        this.$.codePre.classList.remove("isActive");
+      }
+    }
+  });
+</script>

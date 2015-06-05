@@ -1,0 +1,50 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+
+<dom-module id="code-box">
+  <template>
+
+    <div class="code-box">
+      <header class="code-box-header">
+        <nav id="nav" class="code-box-nav">
+          <template is="dom-repeat" items="{{langArray}}">
+            <button on-click="toggleLang" data-code$="{{item}}">{{item}}</button>
+          </template>
+        </nav>
+      </header>
+      <div id="examples" class="code-box-examples">
+        <content></content>
+      </div>
+    </div>
+
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: "code-box",
+    properties: {
+      // declare the owner property
+      langs: {
+        type: String
+      }
+    },
+    ready: function(e) {
+      this.langArray = this.langs.split(',');
+      NodeList.prototype.forEach = Array.prototype.forEach
+      HTMLCollection.prototype.forEach = Array.prototype.forEach
+    },
+    toggleLang: function(e) {
+      var selectedLang = e.target.attributes["data-code"].value;
+      var selectedButton = e.target;
+
+      this.$.nav.children.forEach(function(button) {
+        button.classList.remove('selected');
+        if(button === selectedButton) {
+          button.classList.add('selected');
+        }
+      });
+
+      this.fire('selectedLang', selectedLang);
+    }
+  });
+</script>

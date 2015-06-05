@@ -212,9 +212,9 @@ img.white-bg {
 
 .code-box {
     border-radius: 4px;
-    background: #253238;
+    background: #191919;
     box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-    margin-bottom: 16px
+    margin-bottom: 8px;
 }
 
 .code-box header {
@@ -246,8 +246,8 @@ img.white-bg {
 }
 
 .code-box nav button.is-selected,.code-box nav button.selected {
-    background: #0262C2;
-    color: #FFF
+  background: #353535;
+  color: #DADADA;
 }
 
 .code-box .prettyprint {
@@ -268,8 +268,7 @@ img.white-bg {
 }
 
 .code-box-examples pre code {
-  position: absolute;
-  top: 0;
+
 }
 
 code {
@@ -280,6 +279,10 @@ code {
 .reveal pre {
   margin: 0;
   width: 99%;
+}
+
+.reveal pre code {
+  max-height: 500px;
 }
 
 // Theme template ------------------------------

@@ -1,0 +1,24 @@
+{
+  "name": "Firebase-Deck",
+  "version": "0.0.5",
+  "homepage": "https://github.com/davideast/firebase-intro",
+  "authors": [
+    "David East <david@firebase.com>"
+  ],
+  "description": "An introduction to Firebase Deck",
+  "main": "index.html",
+  "keywords": [
+    "Firebase"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.0.0"
+  }
+}
