@@ -174,14 +174,20 @@
 
         <section>
           <h2>Store Data</h2>
-          <pre>
-            <code data-trim class="javascript">
-var ref = new Firebase('https://webapi.firebaseio.com/realtime');
+          <code-box langs="JavaScript,Swift,Java">
+            <code-example lang="JavaScript">
+var ref = new Firebase("https://&lt;your-firebase-app&gt;.firebaseio.com/message");
 ref.set('All the things');
-            </code>
-          </pre>
-
-
+            </code-example>
+            <code-example lang="Swift">
+let ref = Firebase(url: "https://&lt;your-firebase-app&gt;.firebaseio.com/message")
+ref.setValue("All the things")
+            </code-example>
+            <code-example lang="Java">
+Firebase ref = new Firebase("https://&lt;your-firebase-app&gt;.firebaseio.com/message");
+ref.setValue("All the things");
+            </code-example>
+          </code-box>
 
         </section>
 
@@ -190,16 +196,26 @@ ref.set('All the things');
 
           <code-box langs="JavaScript,Swift,Java">
             <code-example lang="JavaScript">
-var ref = new Firebase("https://");
+var ref = new Firebase("https://&lt;your-firebase-app&gt;.firebaseio.com/message");
 ref.on("value", function(snap) {
   console.log(snap.val());
 });
             </code-example>
             <code-example lang="Swift">
-var ref = Firebase(url: "https://")
+let ref = Firebase(url: "https://&lt;your-firebase-app&gt;.firebaseio.com/message")
+ref.observeEventType(.Value, withBlock: { snap in
+  println(snap.value)
+})
             </code-example>
             <code-example lang="Java">
-Firebase ref = new Firebase("https://");
+Firebase ref = new Firebase("https://&lt;your-firebase-app&gt;.firebaseio.com/message");
+ref.addValueEventListener(new ValueEventListener() {
+  @Override
+  public void onDataChange(DataSnapshot snapshot) {
+    System.out.println(snapshot.getValue());
+  }
+  @Override public void onCancelled(FirebaseError error) { }
+});
             </code-example>
           </code-box>
 
@@ -211,14 +227,40 @@ Firebase ref = new Firebase("https://");
         </section>
 
         <section>
-          <h3>Offline</h3>
+          <h3>Intermittent Offline</h3>
 
-          <p class="text-small">What happens when the lights go out?</p>
+          <p class="text-small">What happens when you go through a tunnel?</p>
           <br><br>
           <p class="text-small fragment">
-            On mobile, Firebase clients store a local cache of your data. When the user
+            Firebase clients store a local cache of your data. When the user
             goes offline, the app still works as expected with the local cache.
           </p>
+
+        </section>
+
+        <section>
+          <h3>Extended Offline</h3>
+
+          <p class="text-small">What happens when you go on a flight?</p>
+          <br><br>
+          <p class="text-small fragment">
+            On mobile, Firebase persists data to a local store. The app will continue
+            to work even across app restarts.
+          </p>
+
+        </section>
+
+        <section>
+          <h3>One line of code</h3>
+
+          <code-box langs="Swift,Java">
+            <code-example lang="Swift">
+Firebase.defaultConfig().persistenceEnabled = true
+            </code-example>
+            <code-example lang="Java">
+Firebase.getDefaultConfig().setPersistenceEnabled(true);
+            </code-example>
+          </code-box>
 
         </section>
 
@@ -232,8 +274,6 @@ Firebase ref = new Firebase("https://");
 
           <code-box langs="JavaScript,Swift,Java">
             <code-example lang="JavaScript" prop="one">
-var ref = new Firebase('https://webapi.firebaseio.com/');
-
 // Login with Google
 ref.authWithOAuthPopup('google', function(error, authData) {
   console.log(authData);
@@ -248,11 +288,30 @@ ref.onAuth(function(authData) {
             </code-example>
 
             <code-example lang="Swift">
-var ref = Firebase(url: "https://")
+ref.authWithOAuthProvider("google", token: "&lt;OAuth Token&gt;",
+    withCompletionBlock: { error, authData in
+    if error != nil {
+        // Error authenticating with Firebase with OAuth token
+    } else {
+        // User is now logged in!
+        println("Successfully logged in! \(authData)")
+    }
+})
             </code-example>
 
             <code-example lang="Java">
-Firebase ref = new Firebase("https://");
+Firebase ref = new Firebase("https://&lt;YOUR-FIREBASE-APP&gt;.firebaseio.com");
+ref.authWithOAuthToken("google", "&lt;OAuth Token&gt;", new Firebase.AuthResultHandler() {
+    @Override
+    public void onAuthenticated(AuthData authData) {
+        // the Google user is now authenticated with your Firebase app
+    }
+
+    @Override
+    public void onAuthenticationError(FirebaseError firebaseError) {
+        // there was an error
+    }
+});
             </code-example>
 
           </code-box>
@@ -268,8 +327,79 @@ Firebase ref = new Firebase("https://");
         </section>
 
         <section>
+          <h3>Security</h3>
+          <p class="era-point">
+            By default everyone can write and read
+          </p>
+					<pre>
+						<code data-trim class="json">
+{
+  "rules": {
+    ".read": true,
+    ".write": true,
+  }
+}
+						</code>
+					</pre>
+        </section>
+
+        <section>
+          <p class="era-point">
+            Everyone can read, but no one can write
+          </p>
+					<pre>
+						<code data-trim class="json">
+{
+  "rules": {
+    ".read": true,
+    ".write": false,
+  }
+}
+						</code>
+					</pre>
+        </section>
+
+        <section>
+          <p class="era-point">
+            Secure specific parts of your Firebase
+          </p>
+					<pre>
+						<code data-trim class="json">
+{
+  "rules": {
+    ".read": true,
+    "message": {
+      ".write": false
+    }
+  }
+}
+						</code>
+					</pre>
+        </section>
+
+        <section>
+          <p class="era-point">
+            Special variables to power authentication
+          </p>
+					<pre>
+						<code data-trim class="json">
+{
+  "rules": {
+    ".read": true,
+    "message": {
+      ".write": "auth !== null",
+      ".validate": "!data.exists()"
+    }
+  }
+}
+						</code>
+					</pre>
+        </section>
+
+
+        <section>
 					<h3>Security</h3>
-					<p class="text-small">Secure user data</p>
+					<p class="text-small">Use $wildcards as route parameters</p>
 					<pre>
 						<code data-trim class="json">
 {
@@ -474,32 +604,6 @@ app.controller('ChatCtrl', function($scope, $firebaseArray) {
       Reveal.addEventListener( 'slidechanged', function( event ) {
         signPostEra( event );
       });
-
-      // NodeList.prototype.forEach = Array.prototype.forEach
-      // HTMLCollection.prototype.forEach = Array.prototype.forEach
-      //
-      // var codeButtons = document.querySelectorAll('.code-box-nav button');
-      // codeButtons.forEach(function(button) {
-      //
-      //   button.addEventListener('click', function(e) {
-      //     var codeLang = e.target.attributes['data-code'].value;
-      //     var codeExamples = e.target.parentElement.parentElement.nextElementSibling.children;
-      //
-      //     codeExamples.forEach(function(example) {
-      //       var exampleCodeLang = example.attributes['data-code'].value;
-      //
-      //       if (example.classList.contains('isActive')) {
-      //         example.classList.remove('isActive');
-      //       }
-      //
-      //       if(codeLang === exampleCodeLang) {
-      //         example.classList.add('isActive');
-      //       }
-      //
-      //     });
-      //
-      //   });
-      // });
 
     </script>
   </body>
