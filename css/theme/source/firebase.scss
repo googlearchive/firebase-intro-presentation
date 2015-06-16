@@ -267,10 +267,6 @@ img.white-bg {
   display: block;
 }
 
-.code-box-examples pre code {
-
-}
-
 code {
   display: none;
   margin: 8px;
@@ -283,6 +279,17 @@ code {
 
 .reveal pre code {
   max-height: 500px;
+}
+
+section.present.hasCode {
+  height: 500px;
+}
+
+pre.code-example.isActive {
+  code.code-example {
+    position: absolute !important;
+    top: 0 !important;
+  }
 }
 
 // Theme template ------------------------------
