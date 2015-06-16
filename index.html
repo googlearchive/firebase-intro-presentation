@@ -268,6 +268,42 @@ Firebase.getDefaultConfig().setPersistenceEnabled(true);
           <img src="images/login-box.png" class="no-style framework-logo">
         </section>
 
+        <section>
+
+          <p class="era-point text-small">
+            Firebase supports several forms of authentication
+          </p>
+
+          <p class="era-point fragment">
+            Email &amp; Password
+          </p>
+
+          <p class="era-point fragment">
+             Google
+          </p>
+
+          <p class="era-point fragment">
+             Twitter
+          </p>
+
+          <p class="era-point fragment">
+             Facebook
+          </p>
+
+          <p class="era-point fragment">
+             Github
+          </p>
+
+          <p class="era-point fragment">
+             Anonymous
+          </p>
+
+          <p class="era-point fragment">
+             ...and even custom backends
+          </p>
+
+        </section>
+
         <section class="hasCode">
 
           <h3>Authentication</h3>
@@ -278,7 +314,44 @@ Firebase.getDefaultConfig().setPersistenceEnabled(true);
 ref.authWithOAuthPopup('google', function(error, authData) {
   console.log(authData);
 });
+            </code-example>
 
+            <code-example lang="Swift">
+ref.authWithOAuthProvider("google", token: "&lt;OAuth Token&gt;",
+    withCompletionBlock: { error, authData in
+    if error != nil {
+        // Error authenticating with Firebase with OAuth token
+    } else {
+        // User is now logged in!
+        println("Successfully logged in! \(authData)")
+    }
+})
+            </code-example>
+
+            <code-example lang="Java">
+ref.authWithOAuthToken("google", "&lt;OAuth Token&gt;", new Firebase.AuthResultHandler() {
+    @Override
+    public void onAuthenticated(AuthData authData) {
+        // the Google user is now authenticated with your Firebase app
+    }
+
+    @Override
+    public void onAuthenticationError(FirebaseError firebaseError) {
+        // there was an error
+    }
+});
+            </code-example>
+
+          </code-box>
+
+        </section>
+
+        <section class="hasCode">
+
+          <h3>Authentication</h3>
+
+          <code-box langs="JavaScript,Swift,Java">
+            <code-example lang="JavaScript" prop="one">
 // Listen for authentcated users
 ref.onAuth(function(authData) {
   if(authData) {
@@ -300,7 +373,6 @@ ref.authWithOAuthProvider("google", token: "&lt;OAuth Token&gt;",
             </code-example>
 
             <code-example lang="Java">
-Firebase ref = new Firebase("https://&lt;YOUR-FIREBASE-APP&gt;.firebaseio.com");
 ref.authWithOAuthToken("google", "&lt;OAuth Token&gt;", new Firebase.AuthResultHandler() {
     @Override
     public void onAuthenticated(AuthData authData) {
@@ -316,10 +388,6 @@ ref.authWithOAuthToken("google", "&lt;OAuth Token&gt;", new Firebase.AuthResultH
 
           </code-box>
 
-        </section>
-
-        <section>
-          <h1>(Optional) Live Coding</h1>
         </section>
 
         <section>
@@ -439,10 +507,15 @@ firebase deploy
         <section>
 					<h3>Hosting</h3>
 					<p class="text-small era-point">Production-grade</p>
+          <p class="text-small era-point">Static Asset</p>
 					<p class="text-small era-point">Free SSL</p>
 					<p class="text-small era-point">CDN cached assets</p>
 					<p class="text-small era-point">One click rollbacks</p>
 				</section>
+
+        <section>
+          <h1>(Optional) Live Coding</h1>
+        </section>
 
         <section>
 					<h3>Tooling & Integration</h3>
