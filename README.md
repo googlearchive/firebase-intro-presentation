@@ -1,12 +1,6 @@
-# Intro to Firebase - a sample GDG talk
+# Intro to Firebase
 
-This slide deck can be customized to give an introductory talk about Firebase. It was designed with
-[Google Developer Groups](https://developers.google.com/groups/) (GDGs) in mind. Please feel free to
-use this talk and customize it for your own needs.
-
-This deck is derived from [a repo created by David East](https://github.com/davideast/firebase-intro),
-a Developer Advocate at Firebase. It is powered by [reveal.js](http://lab.hakim.se/reveal-js), a
-wonderful and powerful framework for creating HTML presentations.
+This slide deck can be customized to give an introductory talk about Firebase. It is powered by [reveal.js](http://lab.hakim.se/reveal-js), a wonderful and powerful framework for creating HTML presentations.
 
 
 ## Presentations
@@ -18,8 +12,7 @@ Here are some past presentations made with this desk:
 | Mike Koss | [Seattle GDG](https://plus.sandbox.google.com/events/cp5b162fccbtrk4l3ah2blb5je8) | April 20, 2015 | koss@google.com |
 | Jacob Wenger | GDG Leads Summit | May 27, 2015 | jacob@firebase.com |
 
-If you end up using this deck, please let me know so we can share the presentation here!
-
+If you end up using this deck, please let us know so we can share the presentation here!
 
 ## Setup
 
@@ -28,9 +21,9 @@ server for the content. To get started, run the following commands:
 
 ```bash
 $ git clone git@github.com:davideast/firebase-intro.git
-$ cd firebase-intro         # go to the firebase-intro directory
-$ npm install -g grunt-cli  # globally install grunt task runner
-$ npm install               # install local npm build / test dependencies
+$ cd firebase-intro-presentation         # go to the firebase-intro directory
+$ npm install -g grunt-cli               # globally install grunt task runner
+$ npm install                            # install local npm build / test dependencies
 ```
 
 To build the slide deck and run the test suite:
