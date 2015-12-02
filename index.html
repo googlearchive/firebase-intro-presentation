@@ -32,8 +32,8 @@
     </script>
 
     <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
-    <link rel="import" href="/code-box/code-box.html">
-    <link rel="import" href="/code-box/code-example.html">
+    <link rel="import" href="code-box/code-box.html">
+    <link rel="import" href="code-box/code-example.html">
 
   <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
   <script>
@@ -138,7 +138,7 @@
 					<h3>Forget the Server</h3>
 					<p class="era-point">Firebase apps can run on client-side code only</p>
 					<br>
-					<img src="/images/platforms.png" alt="" class="no-style framework-logo">
+					<img src="images/platforms.png" alt="" class="no-style framework-logo">
 				</section>
 
         <section>
@@ -152,7 +152,7 @@
         </section>
 
         <section>
-          <img src="/images/simple-api.png" alt="" class="no-style">
+          <img src="images/simple-api.png" alt="" class="no-style">
         </section>
 
         <section>
@@ -164,12 +164,12 @@
         </section>
 
         <section>
-          <img src="/images/Realtime-sync-anim.gif" alt="" class="no-style" style="max-width: 85%;">
+          <img src="images/Realtime-sync-anim.gif" alt="" class="no-style" style="max-width: 85%;">
         </section>
 
         <section>
           <p class="text-medium">SDKs</p>
-          <img src="/images/platforms.png" alt="" class="no-style">
+          <img src="images/platforms.png" alt="" class="no-style">
         </section>
 
         <section>
@@ -223,7 +223,7 @@ ref.addValueEventListener(new ValueEventListener() {
 
         <section>
           <h3>Offline</h3>
-          <img class="no-style" src="/images/offline.png">
+          <img class="no-style" src="images/offline.png">
         </section>
 
         <section>
@@ -361,27 +361,22 @@ ref.onAuth(function(authData) {
             </code-example>
 
             <code-example lang="Swift">
-ref.authWithOAuthProvider("google", token: "&lt;OAuth Token&gt;",
-    withCompletionBlock: { error, authData in
-    if error != nil {
-        // Error authenticating with Firebase with OAuth token
-    } else {
-        // User is now logged in!
-        println("Successfully logged in! \(authData)")
+// Listen for authenticated users
+ref.observeAuthEventWithBlock { authData in
+    if authData != nil {
+        println("User is logged in! \(authData)")
     }
-})
+}
             </code-example>
 
             <code-example lang="Java">
-ref.authWithOAuthToken("google", "&lt;OAuth Token&gt;", new Firebase.AuthResultHandler() {
+// Listen for authentcated users
+ref.addAuthStateListener(new Firebase.AuthStateListener() {
     @Override
-    public void onAuthenticated(AuthData authData) {
-        // the Google user is now authenticated with your Firebase app
-    }
-
-    @Override
-    public void onAuthenticationError(FirebaseError firebaseError) {
-        // there was an error
+    public void onAuthStateChanged(AuthData authData) {
+        if (authData != null) {
+            System.out.println("User is logged in!");
+        }
     }
 });
             </code-example>
@@ -436,8 +431,9 @@ ref.authWithOAuthToken("google", "&lt;OAuth Token&gt;", new Firebase.AuthResultH
 {
   "rules": {
     ".read": true,
+    ".write": false,
     "message": {
-      ".write": false
+      ".write": true 
     }
   }
 }
@@ -524,10 +520,10 @@ firebase deploy
 
         <section>
           <h3>Bindings</h3>
-          <img src="/images/backbonejs.png" class="framework-logo no-style" />
-          <img src="/images/emberjs.png" class="framework-logo no-style" />
-          <img src="/images/react.png" class="framework-logo no-style" />
-          <img src="/images/angularjs.png" class="framework-logo no-style" />
+          <img src="images/backbonejs.png" class="framework-logo no-style" />
+          <img src="images/emberjs.png" class="framework-logo no-style" />
+          <img src="images/react.png" class="framework-logo no-style" />
+          <img src="images/angularjs.png" class="framework-logo no-style" />
         </section>
 
         <section>
