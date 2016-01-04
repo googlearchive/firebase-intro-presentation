@@ -361,27 +361,22 @@ ref.onAuth(function(authData) {
             </code-example>
 
             <code-example lang="Swift">
-ref.authWithOAuthProvider("google", token: "&lt;OAuth Token&gt;",
-    withCompletionBlock: { error, authData in
-    if error != nil {
-        // Error authenticating with Firebase with OAuth token
-    } else {
-        // User is now logged in!
-        println("Successfully logged in! \(authData)")
+// Listen for authenticated users
+ref.observeAuthEventWithBlock { authData in
+    if authData != nil {
+        println("User is logged in! \(authData)")
     }
-})
+}
             </code-example>
 
             <code-example lang="Java">
-ref.authWithOAuthToken("google", "&lt;OAuth Token&gt;", new Firebase.AuthResultHandler() {
+// Listen for authentcated users
+ref.addAuthStateListener(new Firebase.AuthStateListener() {
     @Override
-    public void onAuthenticated(AuthData authData) {
-        // the Google user is now authenticated with your Firebase app
-    }
-
-    @Override
-    public void onAuthenticationError(FirebaseError firebaseError) {
-        // there was an error
+    public void onAuthStateChanged(AuthData authData) {
+        if (authData != null) {
+            System.out.println("User is logged in!");
+        }
     }
 });
             </code-example>
@@ -436,8 +431,9 @@ ref.authWithOAuthToken("google", "&lt;OAuth Token&gt;", new Firebase.AuthResultH
 {
   "rules": {
     ".read": true,
+    ".write": false,
     "message": {
-      ".write": false
+      ".write": true 
     }
   }
 }
